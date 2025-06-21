@@ -1,70 +1,95 @@
-import { pool } from '../database.config';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateNoteDto } from './dtos/create-notebook.dto';
-import { UpdateNotebookDto } from './dtos/update-notebook.dto';
+import { Note } from './interface/notes.interface';
+import { DbService } from '../database/database.service';
+import { UpdateNoteDto } from './dtos/update-notebook.dto';
 
 @Injectable()
 export class NoteBookService {
-  async create(createNoteDto: CreateNoteDto) {
+  constructor(private readonly dbService: DbService) {}
+
+  async create(createNoteDto: CreateNoteDto, userId: string): Promise<Note> {
     const { title, content } = createNoteDto;
 
-    const result = await pool.query(
-      `INSERT INTO notes (title, content)
-       VALUES ($1, $2)
-       RETURNING *`,
-      [title, content],
+    const result = await this.dbService.query<Note>(
+      `INSERT INTO notes (title, content, user_id)
+             VALUES ($1, $2, $3)
+             RETURNING *`,
+      [title, content, userId],
     );
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return result.rows[0];
+
+    return result[0];
   }
 
-  async findAll() {
-    const result = await pool.query(
-      ` SELECT *
-        FROM notes
-        ORDER BY created_at  `,
-    );
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return result.rows;
-  }
-
-  async findOne(id: number) {
-    const result = await pool.query(
+  async findAllByUser(userId: string): Promise<Note[]> {
+    const result = await this.dbService.query<Note>(
       `SELECT *
-       FROM notes
-       WHERE id = $1`,
-      [id],
+             FROM notes
+             WHERE user_id = $1
+             ORDER BY created_at DESC`,
+      [userId],
     );
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return result.rows[0];
+
+    return result;
   }
 
-  async update(id: number, updateNotebookDto: UpdateNotebookDto) {
-    const { title, content } = updateNotebookDto;
-
-    const result = await pool.query(
-      `UPDATE notes
-       SET title   = $1,
-           content = $2
-       WHERE id = $3
-       RETURNING *`,
-      [title, content, id],
+  async findOne(id: string, userId: string): Promise<Note> {
+    const result = await this.dbService.query<Note>(
+      `SELECT *
+             FROM notes
+             WHERE id = $1
+               AND user_id = $2`,
+      [id, userId],
     );
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return result.rows[0];
-  }
 
-  async delete(id: number) {
-    const result = await pool.query(
-      `DELETE
-       FROM notes
-       WHERE id = $1
-       RETURNING *`,
-      [id],
-    );
-    if (result.rows.length === 0) {
-      throw new NotFoundException(`Notebook with ${id} not found `);
+    if (result.length === 0) {
+      throw new NotFoundException(`Note with ID ${id} not found`);
     }
-    return { message: 'Note deleted successfully.' };
+
+    return result[0];
+  }
+
+  async update(
+    id: string,
+    updateNoteDto: UpdateNoteDto,
+    userId: string,
+  ): Promise<Note> {
+    const { title, content } = updateNoteDto;
+
+    // First check if the note exists and belongs to the user
+    await this.findOne(id, userId);
+
+    const result = await this.dbService.query<Note>(
+      `UPDATE notes
+             SET title      = COALESCE($1, title),
+                 content    = COALESCE($2, content),
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = $3
+               AND user_id = $4
+             RETURNING *`,
+      [title, content, id, userId],
+    );
+
+    return result[0];
+  }
+
+  async delete(id: string, userId: string): Promise<{ message: string }> {
+    // First check if the note exists and belongs to the user
+    await this.findOne(id, userId);
+
+    const result = await this.dbService.query<Note>(
+      `DELETE
+             FROM notes
+             WHERE id = $1
+               AND user_id = $2
+             RETURNING *`,
+      [id, userId],
+    );
+
+    if (result.length === 0) {
+      throw new NotFoundException(`Note with ID ${id} not found`);
+    }
+
+    return { message: 'Note deleted successfully' };
   }
 }

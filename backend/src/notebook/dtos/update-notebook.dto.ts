@@ -1,9 +1,4 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { PartialType } from '@nestjs/swagger';
+import { CreateNoteDto } from './create-notebook.dto';
 
-export class UpdateNotebookDto {
-  @ApiPropertyOptional({ example: 'update title' })
-  title?: string;
-
-  @ApiPropertyOptional({ example: 'update notes content' })
-  content?: string;
-}
+export class UpdateNoteDto extends PartialType(CreateNoteDto) {}

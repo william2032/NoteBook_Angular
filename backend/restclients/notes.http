@@ -1,0 +1,10 @@
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndpbGx5QGdtYWlsLmNvbSIsInN1YiI6ImI4NmY5MDYzLTJjN2UtNDRlOC05MWVkLTFjY2MwYmI5NGExZSIsImlhdCI6MTc1MDQ4ODkzMiwiZXhwIjoxNzUwNDkyNTMyfQ.TDZXxy8JQ7Laf-x3O1g4aIxwAwaznarqwTDhLEW0jag
+### Create Note
+POST http://localhost:3000/notes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "My First Note",
+  "content": "This is the content of the note."
+}
