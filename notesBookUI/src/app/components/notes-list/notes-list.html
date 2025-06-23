@@ -1,47 +1,47 @@
-<div class="notes-container">
-  <div class="notes-header">
-    <h1>My Notes</h1>
-    <div class="header-actions">
-      <button mat-raised-button color="primary" routerLink="/notes">
-        <mat-icon>add</mat-icon>
-        New Note
-      </button>
-      <button mat-stroked-button routerLink="/dashboard">
-        <mat-icon>dashboard</mat-icon>
-        Dashboard
-      </button>
-    </div>
-  </div>
+<!--<div class="notes-container">-->
+<!--  <div class="notes-header">-->
+<!--    <h1>My Notes</h1>-->
+<!--    <div class="header-actions">-->
+<!--      <button mat-raised-button color="primary" routerLink="/notes">-->
+<!--        <mat-icon>add</mat-icon>-->
+<!--        New Note-->
+<!--      </button>-->
+<!--      <button mat-stroked-button routerLink="/dashboard">-->
+<!--        <mat-icon>dashboard</mat-icon>-->
+<!--        Dashboard-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="notes-content">
-    <mat-card class="note-card" *ngFor="let note of sampleNotes">
-      <mat-card-header>
-<!--        <mat-card-title>{{ note.title }}</mat-card-title>-->
-<!--        <mat-card-subtitle>{{ note.date }}</mat-card-subtitle>-->
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ note.content }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button [routerLink]="['/notes/edit', note.id]">
-          <mat-icon>edit</mat-icon>
-          Edit
-        </button>
-        <button mat-button color="warn" (click)="deleteNote(note.id)">
-          <mat-icon>delete</mat-icon>
-          Delete
-        </button>
-      </mat-card-actions>
-    </mat-card>
+<!--  <div class="notes-content">-->
+<!--    <mat-card class="note-card" *ngFor="let note of sampleNotes">-->
+<!--      <mat-card-header>-->
+<!--&lt;!&ndash;        <mat-card-title>{{ note.title }}</mat-card-title>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-card-subtitle>{{ note.date }}</mat-card-subtitle>&ndash;&gt;-->
+<!--      </mat-card-header>-->
+<!--      <mat-card-content>-->
+<!--        <p>{{ note.content }}</p>-->
+<!--      </mat-card-content>-->
+<!--      <mat-card-actions>-->
+<!--        <button mat-button [routerLink]="['/notes/edit', note.id]">-->
+<!--          <mat-icon>edit</mat-icon>-->
+<!--          Edit-->
+<!--        </button>-->
+<!--        <button mat-button color="warn" (click)="deleteNote(note.id)">-->
+<!--          <mat-icon>delete</mat-icon>-->
+<!--          Delete-->
+<!--        </button>-->
+<!--      </mat-card-actions>-->
+<!--    </mat-card>-->
 
-    <div class="empty-state" *ngIf="sampleNotes.length === 0">
-      <mat-icon>note</mat-icon>
-      <h2>No notes yet</h2>
-      <p>Create your first note to get started!</p>
-      <button mat-raised-button color="primary" routerLink="/notes/new">
-        <mat-icon>add</mat-icon>
-        Create Note
-      </button>
-    </div>
-  </div>
-</div>
+<!--    <div class="empty-state" *ngIf="sampleNotes.length === 0">-->
+<!--      <mat-icon>note</mat-icon>-->
+<!--      <h2>No notes yet</h2>-->
+<!--      <p>Create your first note to get started!</p>-->
+<!--      <button mat-raised-button color="primary" routerLink="/notes/new">-->
+<!--        <mat-icon>add</mat-icon>-->
+<!--        Create Note-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

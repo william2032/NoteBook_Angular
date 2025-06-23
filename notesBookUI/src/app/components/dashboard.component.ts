@@ -120,6 +120,6 @@ export class DashboardComponent implements OnInit {
   }
 
   createNote(): void {
-    this.router.navigate(['/notes/new']);
+    this.router.navigate(['/notes']);
   }
 }
