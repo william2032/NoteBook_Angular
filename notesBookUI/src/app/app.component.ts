@@ -4,7 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {RouterModule} from '@angular/router';
-import {RegisterComponent} from './components/register/register';
+import {CommonModule} from '@angular/common';
 
 @Component({
   standalone: true,
@@ -29,7 +29,8 @@ import {RegisterComponent} from './components/register/register';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    CommonModule
   ]
 })
 export class AppComponent {

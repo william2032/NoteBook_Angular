@@ -1,12 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NotesService} from '../../services/notes.service';
 import {Note} from '../../model/note';
+import {MatButton} from '@angular/material/button';
+import {MatCard, MatCardContent} from '@angular/material/card';
+import {MatError, MatFormField} from '@angular/material/input';
 
 @Component({
   selector: 'app-note-form',
   templateUrl: './notes-form.html',
+  imports: [
+    MatButton,
+    RouterLink,
+    MatCard,
+    MatFormField,
+    ReactiveFormsModule,
+    MatError,
+    MatCardContent,
+    MatFormField
+  ],
   styleUrls: ['./notes-form.css']
 })
 export class NoteFormComponent implements OnInit {
