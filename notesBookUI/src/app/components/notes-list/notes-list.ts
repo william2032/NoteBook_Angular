@@ -1,12 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NotesService} from '../../services/notes.service';
 import {AuthService} from '../../services/auth.service';
 import {Note} from '../../model/note';
+import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from '@angular/material/card';
+import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-notes-list',
   templateUrl: './notes-list.html',
+  imports: [
+    MatCardActions,
+    MatButton,
+    RouterLink,
+    MatCardHeader,
+    MatCard,
+    MatCardContent,
+    MatIcon
+  ],
   styleUrls: ['./notes-list.css']
 })
 export class NotesListComponent implements OnInit {
