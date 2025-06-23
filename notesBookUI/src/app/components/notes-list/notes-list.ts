@@ -11,13 +11,13 @@ import {MatIcon} from '@angular/material/icon';
   selector: 'app-notes-list',
   templateUrl: './notes-list.html',
   imports: [
-    MatCardActions,
-    MatButton,
-    RouterLink,
-    MatCardHeader,
-    MatCard,
-    MatCardContent,
-    MatIcon
+    // MatCardActions,
+    // MatButton,
+    // RouterLink,
+    // MatCardHeader,
+    // MatCard,
+    // MatCardContent,
+    // MatIcon
   ],
   styleUrls: ['./notes-list.css']
 })

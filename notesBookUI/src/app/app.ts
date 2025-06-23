@@ -9,11 +9,11 @@ import {RegisterComponent} from './components/register/register';
   standalone: true,
   imports: [
     CommonModule,
-    RegisterComponent
+    RegisterComponent,
+    RouterOutlet
   ],
   template: `
     <div class="app-container">
-      <!-- Optional: Navigation bar that shows/hides based on route -->
       <nav class="navbar" *ngIf="showNavigation">
         <div class="nav-content">
           <h1>My Notes App</h1>
@@ -24,8 +24,7 @@ import {RegisterComponent} from './components/register/register';
 
       <!-- Main content area where components will be rendered -->
       <main class="main-content">
-        <!--        <router-outlet></router-outlet>-->
-        <app-register></app-register>
+                <router-outlet></router-outlet>
       </main>
     </div>
   `,

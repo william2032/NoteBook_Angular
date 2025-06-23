@@ -11,14 +11,14 @@ import {MatError, MatFormField} from '@angular/material/input';
   selector: 'app-note-form',
   templateUrl: './notes-form.html',
   imports: [
-    MatButton,
-    RouterLink,
-    MatCard,
-    MatFormField,
-    ReactiveFormsModule,
-    MatError,
-    MatCardContent,
-    MatFormField
+    // MatButton,
+    // RouterLink,
+    // MatCard,
+    // MatFormField,
+    // ReactiveFormsModule,
+    // MatError,
+    // MatCardContent,
+    // MatFormField
   ],
   styleUrls: ['./notes-form.css']
 })
